@@ -63,10 +63,10 @@ CREATE TABLE tournament(
 
 
 #------------------------------------------------------------
-# Table: match
+# Table: matchs
 #------------------------------------------------------------
 
-CREATE TABLE match(
+CREATE TABLE matchs(
         id            Int  Auto_increment  NOT NULL ,
         name          Varchar (150) NOT NULL ,
         adress        Varchar (255) NOT NULL ,
@@ -105,10 +105,12 @@ CREATE TABLE team(
 CREATE TABLE comment(
         id       Int  Auto_increment  NOT NULL ,
         content  Text NOT NULL ,
-        id_match Int NOT NULL
+        id_match Int NOT NULL ,
+        id_user  Int NOT NULL
 	,CONSTRAINT comment_PK PRIMARY KEY (id)
 
-	,CONSTRAINT comment_match_FK FOREIGN KEY (id_match) REFERENCES match(id)
+	,CONSTRAINT comment_match_FK FOREIGN KEY (id_match) REFERENCES matchs(id)
+	,CONSTRAINT comment_user0_FK FOREIGN KEY (id_user) REFERENCES user(id)
 )ENGINE=InnoDB;
 
 
@@ -136,6 +138,6 @@ CREATE TABLE have(
 	,CONSTRAINT have_PK PRIMARY KEY (id,id_match)
 
 	,CONSTRAINT have_team_FK FOREIGN KEY (id) REFERENCES team(id)
-	,CONSTRAINT have_match0_FK FOREIGN KEY (id_match) REFERENCES match(id)
+	,CONSTRAINT have_match0_FK FOREIGN KEY (id_match) REFERENCES matchs(id)
 )ENGINE=InnoDB;
 
